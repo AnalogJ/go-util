@@ -28,3 +28,14 @@ func MapDeepCopy(m map[string]interface{}) (map[string]interface{}, error) {
 
 	return nm, nil
 }
+
+func MapMerge(maps ...map[string]interface{}) map[string]interface{} {
+	merged := map[string]interface{}{}
+
+	for _, singleMap := range maps {
+		for k, v := range singleMap {
+			merged[k] = v
+		}
+	}
+	return merged
+}

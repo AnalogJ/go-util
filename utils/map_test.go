@@ -39,3 +39,17 @@ func TestMapDeepCopy(t *testing.T) {
 	require.Equal(t, "17", actual["example"].(map[string]interface{})["nested"], "should create deep cloned data structure")
 	require.Equal(t, "18", actual["example"].(map[string]interface{})["other"], "should create deep cloned data structure")
 }
+
+func TestMapMerge(t *testing.T) {
+	t.Parallel()
+
+	//test
+	a := map[string]interface{}{"foo": "bar", "a": "b"}
+	b := map[string]interface{}{"foo": "baz", "c": "d"}
+	merged := utils.MapMerge(a, b)
+
+	//assert
+	require.Equal(t, "baz", merged["foo"])
+	require.Equal(t, "b", merged["a"])
+	require.Equal(t, "d", merged["c"])
+}
